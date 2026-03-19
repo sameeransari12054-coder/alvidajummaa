@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvida Jumma Mubarak · romantic</title>
+  <!-- Google Fonts & Font Awesome (icons) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* style.css – soft romantic theme */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fdeff2 0%, #f3e0e9 40%, #f9d8e6 100%);
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* floating hearts + moon/stars animation */
+    .floating-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .floating-bg i {
+      position: absolute;
+      color: rgba(255, 200, 220, 0.4);
+      font-size: 2rem;
+      animation: float 12s linear infinite;
+      text-shadow: 0 0 8px #ffb6c1;
+    }
+    .floating-bg .fa-star { color: rgba(255, 215, 0, 0.3); font-size: 1.4rem; }
+    .floating-bg .fa-moon { color: rgba(240, 230, 140, 0.3); font-size: 2.2rem; }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0.6; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+    /* main card container */
+    .page-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 750px;
+      background: rgba(255, 245, 248, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 42px;
+      box-shadow: 0 20px 40px rgba(171, 93, 133, 0.25), 0 0 0 2px #ffd9e6 inset;
+      padding: 2rem 1.8rem;
+      margin: 2rem auto;
+      border: 1px solid #ffe2f0;
+      transition: all 0.3s ease;
+    }
+    /* pages fade/slide */
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.8rem;
+      animation: fadeSlide 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .page.active-page {
+      display: flex;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    h1, h2 {
+      font-family: 'Dancing Script', cursive;
+      color: #902d5c;
+      text-shadow: 0 2px 10px #ffb8d2;
+      letter-spacing: 1px;
+    }
+    h1 { font-size: 2.8rem; line-height: 1.2; }
+    h2 { font-size: 2.2rem; }
+    .romantic-msg {
+      font-size: 1.2rem;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 1.5rem;
+      border-radius: 38px;
+      color: #681c41;
+      text-align: center;
+      box-shadow: 0 10px 20px #ffd9e6;
+      border: 2px dashed #fbaac3;
+      font-weight: 300;
+    }
+    .romantic-msg i, .fa-heart, .fa-star, .fa-moon { color: #d44e7a; }
+    /* gallery grid */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      margin: 0.8rem 0;
+    }
+    .gallery-item {
+      width: 150px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 30px;
+      box-shadow: 0 8px 18px #dba5b9;
+      transition: all 0.4s;
+      border: 4px solid #ffe2f0;
+      background: #ffe6f1;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05) rotate(1deg);
+      box-shadow: 0 0 25px #f9a8d4;
+      border-color: #ffa5c3;
+    }
+    /* video & audio */
+    .video-wrapper {
+      width: 100%;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px #c0819b;
+      border: 3px solid #ffc1d0;
+    }
+    iframe {
+      width: 100%;
+      height: 250px;
+      display: block;
+    }
+    audio {
+      width: 100%;
+      border-radius: 40px;
+      background: #ffeef4;
+    }
+    .audio-player {
+      background: #ffdbe8;
+      padding: 1rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      box-shadow: inset 0 2px 8px #ffb0c3;
+    }
+    .audio-btn {
+      background: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.6rem 1.8rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #9f3e6b;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #b96f8f;
+      transition: 0.1s linear;
+      border: 1px solid #ffbfd7;
+    }
+    .audio-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 0px 0 #b96f8f;
+    }
+    /* next button & heart button */
+    .nav-btn {
+      background: linear-gradient(135deg, #f6a7c1, #d86f97);
+      border: none;
+      padding: 0.8rem 3rem;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 0 #952f5a, 0 10px 25px #ef9ebe;
+      transition: 0.08s linear;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 2px solid #ffe7f0;
+    }
+    .nav-btn:active {
+      transform: translateY(8px);
+      box-shadow: 0 0px 0 #952f5a, 0 5px 15px #ef9ebe;
+    }
+    .heart-btn {
+      background: none;
+      border: 3px solid #ff98bb;
+      font-size: 2.5rem;
+      padding: 0.2rem 1.8rem;
+      border-radius: 60px;
+      color: #ff2f7a;
+      cursor: pointer;
+      transition: 0.3s;
+      background: rgba(255,240,245,0.7);
+      backdrop-filter: blur(2px);
+    }
+    .heart-btn:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 25px red;
+      background: #ffe3ef;
+    }
+    /* hidden popup surprise */
+    .popup-message {
+      background: #ffecf2;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 1.4rem;
+      color: #aa2e62;
+      box-shadow: 0 5px 0 #c96f93;
+      border: 2px solid #ffb8cf;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .popup-message.show-popup {
+      display: flex;
+    }
+    /* final message glowing */
+    .glow-text {
+      font-size: 1.8rem;
+      font-family: 'Dancing Script', cursive;
+      animation: glowPulse 2.2s infinite;
+      background: #fce7f1;
+      padding: 0.5rem 2rem;
+      border-radius: 60px;
+    }
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 4px #f4799c; }
+      50% { text-shadow: 0 0 20px #feb0cd, 0 0 30px #ff80aa; }
+      100% { text-shadow: 0 0 4px #fbc1d2; }
+    }
+    /* responsive */
+    @media (max-width: 520px) {
+      h1 { font-size: 2.2rem; }
+      .gallery-item { width: 120px; height: 140px; }
+      .page-container { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- floating background elements: stars, moon, hearts -->
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <!-- main container (pages) -->
+  <div class="page-container">
+    <!-- PAGE 1 - Alvida Jumma Mubarak -->
+    <div class="page active-page" id="page1">
+      <h1>Alvida Jumma Mubarak <i class="fas fa-heart" style="color:#e56b8f;"></i></h1>
+      <div class="romantic-msg">
+        <i class="fas fa-star"></i> <i class="fas fa-moon"></i> <i class="fas fa-heart"></i><br>
+        My dearest love, as the blessed Jumma bids farewell,<br>
+        I pray Allah wraps you in mercy and fills your heart with serenity.<br>
+        You are the coolness of my eyes, my dua under the moonlight.<br>
+        Alvida Jumma Mubarak, my angel <span style="font-size:1.6rem;">🌙✨🕌💫</span>
+      </div>
+      <!-- Next button -->
+      <button class="nav-btn" id="next1">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <!-- PAGE 2 - Photo gallery -->
+    <div class="page" id="page2">
+      <h2>For my beautiful girl <i class="fas fa-images"></i></h2>
+      <div class="gallery">
+        <!-- using placeholder images (unsplash) – replace with your own URLs -->
+        <img class="gallery-item" src="image1.png" >
+        
+        <img  class="gallery-item" src="image3aaf.png" >
+        <img  class="gallery-item" src="image4aaf.png" >
+        <img  class="gallery-item"src="imagesameer.png" >
+         
+       
+      </div>
+      <button class="nav-btn" id="next2">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <!-- PAGE 3 - video + audio + final message -->
+    <div class="page" id="page3">
+      <h2>Blessings & love <i class="fas fa-video"></i></h2>
+      <!-- video embed (romantic islamic nature) -->
+      <div class="video-wrapper">
+       
+      <!-- audio player with play/pause & voice message style -->
+      <div class="audio-player">
+        <i class="fas fa-heart" style="font-size:2rem;"></i>
+        <audio id="bgAudio" loop>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+          Your browser does not support audio.
+        </audio>
+        <button class="audio-btn" id="playPauseBtn"><i class="fas fa-play"></i> Play</button>
+        <button class="audio-btn" id="voiceMsgBtn"><i class="fas fa-phone-alt"></i> voice note</button>
+      </div>
+      <!-- final glowing message -->
+      <div class="glow-text">“May Allah bless you with happiness, my love 💖”</div>
+      <!-- heart button & hidden popup -->
+      <button class="heart-btn" id="surpriseHeart"><i class="fas fa-heart"></i> ❤️</button>
+      <div id="popupSurprise" class="popup-message">
+        <i class="fas fa-star"></i> You are my dua 💕 <i class="fas fa-star"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // script.js – romantic functionality
+    (function() {
+      // ---- floating bg generator (hearts, stars, moon) ----
+      const bg = document.getElementById('floatingBg');
+      const symbols = ['fa-heart', 'fa-star', 'fa-moon', 'fa-heart', 'fa-star'];
+      for (let i = 0; i < 25; i++) {
+        const icon = document.createElement('i');
+        const randSym = symbols[Math.floor(Math.random() * symbols.length)];
+        icon.className = `fas ${randSym}`;
+        const size = Math.random() * 2 + 1; // rem
+        icon.style.fontSize = size + 'rem';
+        icon.style.left = Math.random() * 100 + '%';
+        icon.style.animationDuration = (Math.random() * 12 + 8) + 's';
+        icon.style.animationDelay = (Math.random() * 10) + 's';
+        icon.style.opacity = 0.25 + Math.random() * 0.3;
+        bg.appendChild(icon);
+      }
+
+      // ---- page navigation ----
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const page3 = document.getElementById('page3');
+      const next1 = document.getElementById('next1');
+      const next2 = document.getElementById('next2');
+
+      next1.addEventListener('click', () => {
+        page1.classList.remove('active-page');
+        page2.classList.add('active-page');
+      });
+      next2.addEventListener('click', () => {
+        page2.classList.remove('active-page');
+        page3.classList.add('active-page');
+      });
+
+      // ---- audio control (play/pause bg + voice message simulation) ----
+      const audio = document.getElementById('bgAudio');
+      const playBtn = document.getElementById('playPauseBtn');
+      let isPlaying = false; // don't autoplay
+
+      playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          playBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+        } else {
+          audio.play().catch(e => console.log('autoplay blocked, user click needed'));
+          playBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // voice message button: simulates playing a voice message (extra audio)
+      const voiceBtn = document.getElementById('voiceMsgBtn');
+      voiceBtn.addEventListener('click', () => {
+        // create a short "voice message" effect - just a beep + alert simulation (romantic)
+        // We'll just show a popup styled like a voice note, but also play beep?
+        const msg = document.createElement('div');
+        msg.style.position = 'fixed'; msg.style.bottom = '20px'; msg.style.left = '50%';
+        msg.style.transform = 'translateX(-50%)'; msg.style.backgroundColor = '#ffe4f0';
+        msg.style.padding = '1rem 2rem'; msg.style.borderRadius = '60px'; 
+        msg.style.boxShadow = '0 10px 20px #eeaeca'; msg.style.zIndex = '200';
+        msg.style.fontSize = '1.2rem'; msg.style.border = '3px solid #fbb0c0';
+        msg.innerHTML = '<i class="fas fa-headphones"></i> Voice message: “You are my jannah, habibti 💕” <i class="fas fa-heart"></i>';
+        document.body.appendChild(msg);
+        setTimeout(() => { msg.remove(); }, 3500);
+        // also a little sound effect (short beep simulates voice)
+        const voiceAudio = new Audio('data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVoAAAB/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f39/f38=');
+        voiceAudio.volume = 0.6;
+        voiceAudio.play().catch(()=>{});
+      });
+
+      // ---- SURPRISE HEART BUTTON: shows hidden message (toggle) ----
+      const heartSurprise = document.getElementById('surpriseHeart');
+      const popup = document.getElementById('popupSurprise');
+      heartSurprise.addEventListener('click', () => {
+        popup.classList.toggle('show-popup');
+        // also tiny heart burst emoji effect (extra)
+        for (let i=0; i<4; i++) {
+          const heartEm = document.createElement('span');
+          heartEm.innerText = '❤️';
+          heartEm.style.position = 'fixed';
+          heartEm.style.left = Math.random()*80 + 10 + '%';
+          heartEm.style.top = Math.random()*80 + 10 + '%';
+          heartEm.style.fontSize = '2.5rem';
+          heartEm.style.pointerEvents = 'none';
+          heartEm.style.zIndex = '999';
+          heartEm.style.animation = 'float 1.5s ease-out forwards';
+          document.body.appendChild(heartEm);
+          setTimeout(() => heartEm.remove(), 1400);
+        }
+      });
+
+      // optional: when clicking outside the popup, keep it but it's fine
+      // also ensure that if audio ends, button resets
+      audio.addEventListener('ended', () => {
+        isPlaying = false;
+        playBtn.innerHTML = '<i class="fas fa-play"></i> Play';
+      });
+
+      // ---- add additional floating emojis via js (text based) but we already have icons
+      // small extra: page transition smoothness
+
+      // ---- pre-fill gallery with user images (just placeholder urls, user can replace)
+      // we used unsplash images, but they're fine.
+      // Also add a subtle click on image to show love (optional)
+      document.querySelectorAll('.gallery-item').forEach(img => {
+        img.addEventListener('click', () => {
+          alert('❤️ My favourite picture of you! ❤️');
+        });
+      });
+    })();
+  </script>
+  <!-- small inline for extra beauty: ensure audio play/pause works if user taps -->
+  <noscript>JavaScript not enabled</noscript>
+  <!-- Add a few more floating CSS hearts manually (already dynamic) -->
+  <div style="display:none;">romantic alvida jumma</div>
+</body>
+</html>
